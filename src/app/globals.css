@@ -1,0 +1,361 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-jakarta);
+  --font-hand: var(--font-caveat);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@theme {
+  /* Brand blue scale — matches "Not Just Bookkeeping" mock */
+  --color-brand-50: #eef5ff;
+  --color-brand-100: #ddebfe;
+  --color-brand-200: #c3dcfd;
+  --color-brand-300: #96c3fb;
+  --color-brand-400: #62a4f8;
+  --color-brand-500: #2b7fff;
+  --color-brand-600: #1e64ee;
+  --color-brand-700: #1a4edb;
+  --color-brand-800: #1b41b0;
+
+  /* Deep navy ink scale for text */
+  --color-ink-400: #64748f;
+  --color-ink-500: #55617c;
+  --color-ink-600: #414d68;
+  --color-ink-700: #2e3a54;
+  --color-ink-800: #22304a;
+  --color-ink-900: #1a2440;
+  --color-ink-950: #111a2e;
+
+  /* Soft surfaces */
+  --color-mist: #f3f8fe;
+  --color-blob: #d8eafd;
+  --color-blush: #f4e0dc;
+}
+
+:root {
+  --radius: 1rem;
+  --font-jakarta: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-caveat: "Caveat", "Segoe Script", "Bradley Hand", cursive;
+  --background: #ffffff;
+  --foreground: #1a2440;
+  --card: #ffffff;
+  --card-foreground: #1a2440;
+  --popover: #ffffff;
+  --popover-foreground: #1a2440;
+  --primary: #2b7fff;
+  --primary-foreground: #ffffff;
+  --secondary: #eef5ff;
+  --secondary-foreground: #1a4edb;
+  --muted: #f3f8fe;
+  --muted-foreground: #55617c;
+  --accent: #eef5ff;
+  --accent-foreground: #1a4edb;
+  --destructive: #dc2626;
+  --border: #dbe7f8;
+  --input: #cfe0f6;
+  --ring: #2b7fff;
+  --chart-1: #2b7fff;
+  --chart-2: #0ea5e9;
+  --chart-3: #14b8a6;
+  --chart-4: #f59e0b;
+  --chart-5: #f472b6;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1a2440;
+  --sidebar-primary: #2b7fff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eef5ff;
+  --sidebar-accent-foreground: #1a4edb;
+  --sidebar-border: #dbe7f8;
+  --sidebar-ring: #2b7fff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-jakarta);
+  }
+  ::selection {
+    background: rgba(43, 127, 255, 0.18);
+  }
+}
+
+/* ---------- Themed animations ---------- */
+
+@keyframes blob-morph {
+  0%,
+  100% {
+    border-radius: 58% 42% 52% 48% / 46% 50% 50% 54%;
+  }
+  33% {
+    border-radius: 46% 54% 44% 56% / 52% 44% 56% 48%;
+  }
+  66% {
+    border-radius: 52% 48% 58% 42% / 44% 56% 44% 56%;
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-blob {
+  animation: blob-morph 12s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float-soft 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob,
+  .animate-float {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- About section (two-column, semantic classes) ---------- */
+
+/* Clip the decorative ::before/::after circles that hang outside the
+   container so they never create horizontal scroll on small screens. */
+.about-section {
+  overflow-x: clip;
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: 3.5rem;
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .about-container {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-container {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 3.5rem;
+    padding-inline: 2rem;
+  }
+}
+
+/* Left column — image (stacks on top on mobile, sits left on desktop) */
+.about-image {
+  position: relative;
+}
+
+.about-image::before {
+  content: "";
+  position: absolute;
+  left: -1.5rem;
+  top: -1.5rem;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 2rem;
+  background: var(--color-brand-100);
+}
+
+.about-image::after {
+  content: "";
+  position: absolute;
+  right: -1.5rem;
+  bottom: 2rem;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 9999px;
+  background: var(--color-mist);
+}
+
+.about-image-frame {
+  position: relative;
+  width: 100%;
+  max-width: 32rem;
+  margin-inline: auto;
+  aspect-ratio: 40 / 46;
+  overflow: hidden;
+  border: 8px solid var(--color-brand-50);
+  border-radius: 200px 200px 2rem 2rem;
+  background: var(--color-mist);
+  box-shadow: 0 30px 70px rgba(27, 58, 110, 0.16);
+}
+
+.about-image-chip {
+  position: absolute;
+  bottom: -1.5rem;
+  left: 1.5rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 260px;
+  padding: 0.9rem 1.1rem;
+  background: #ffffff;
+  border: 1px solid var(--color-brand-100);
+  border-radius: 1rem;
+  box-shadow: 0 18px 44px rgba(23, 42, 80, 0.14);
+}
+
+.about-image-chip-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background: var(--color-brand-50);
+  color: var(--color-brand-500);
+}
+
+.about-image-chip-text {
+  font-size: 12.5px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--color-ink-600);
+}
+
+.about-image-chip-text strong {
+  display: block;
+  color: var(--color-ink-900);
+}
+
+/* Right column — text (stacks below the image on mobile) */
+.about-text {
+  min-width: 0;
+}
+
+.about-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 1rem;
+  border: 1px solid var(--color-brand-200);
+  border-radius: 9999px;
+  background: var(--color-brand-100);
+  color: var(--color-brand-700);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.bio-heading {
+  margin-top: 1.25rem;
+  font-size: clamp(1.75rem, 1.1rem + 2.2vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--color-ink-900);
+}
+
+.bio-heading .accent {
+  color: var(--color-brand-500);
+}
+
+.about-text p {
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-ink-600);
+}
+
+.about-text .bio-heading + p {
+  margin-top: 1.5rem;
+}
+
+.subheading {
+  margin-top: 2rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--color-ink-900);
+}
+
+.about-text .mission-statement {
+  margin-top: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--color-mist);
+  border-left: 4px solid var(--color-brand-500);
+  border-radius: 0 1rem 1rem 0;
+  color: var(--color-ink-800);
+  font-weight: 600;
+}
+
+.about-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2.25rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 9999px;
+  background: var(--color-brand-500);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 10px 24px rgba(43, 127, 255, 0.35);
+  transition: all 0.3s ease;
+}
+
+.about-cta:hover {
+  background: var(--color-brand-600);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(43, 127, 255, 0.45);
+}
