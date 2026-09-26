@@ -3,7 +3,7 @@ export const SITE = {
   tagline: "Accurate Books · Better Business",
   description:
     "Friendly, accurate bookkeeping for small businesses — monthly reconciliations, bookkeeping cleanup, payroll support, and clear financial reporting. 100% remote, serving all 50 US states. Save 5+ hours a week.",
-  url: "https://www.notjustbookkeeping.com",
+  url: "https://www.nwnotjustbookkeeping.com",
   email: "nwnotjustbookkeeping23@gmail.com",
   image: "/og-image.png",
   portrait: "/images/owner/hero-lifestyle.jpg",
